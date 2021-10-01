@@ -7,7 +7,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'last_login')
+        exclude = ('password', 'created_at', 'updated_at')
 
 
 class RegisterSerializer(serializers.ModelSerializer):

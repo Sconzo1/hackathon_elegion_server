@@ -19,7 +19,7 @@ class TaskView(viewsets.ModelViewSet):
 class UserTaskView(viewsets.ModelViewSet):
     queryset = UserTask.objects.all()
     serializer_class = serializers.UserTaskSerializer
-    permission_classes = [permissions.IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
 
     def get_queryset(self):
         id_user = self.request.query_params.get('id_user')

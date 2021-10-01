@@ -12,9 +12,9 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class UserTaskSerializer(serializers.ModelSerializer):
-    # user = UserSerializer(read_only=True, source='id_user')
-    # task = TaskSerializer(read_only=True, source='id_task')
-    # manager = UserSerializer(read_only=True, source='id_manager')
+    user = UserSerializer(read_only=True, source='id_user')
+    task = TaskSerializer(read_only=True, source='id_task')
+    manager = UserSerializer(read_only=True, source='id_manager')
 
     class Meta:
         model = UserTask
