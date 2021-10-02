@@ -6,11 +6,11 @@ from .models import UserRank, UserType, User
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ('email', 'is_staff', 'is_superuser')
-    list_filter = ('email', 'is_staff', 'is_superuser', 'birthdate')
+    list_display = ('surname', 'name', 'email', 'is_staff', 'is_superuser')
+    list_filter = ('is_staff', 'is_superuser', 'birthdate')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Инфо', {'fields': ('surname', 'name', 'datetime')}),
+        ('Инфо', {'fields': ('surname', 'name', 'birthdate')}),
         ('Права', {
             'fields': ('is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
@@ -23,16 +23,17 @@ class CustomUserAdmin(UserAdmin):
          ),
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}),
+            'fields': ('email', 'password1', 'password2'), }),
         ('Инфо', {
             'classes': ('wide',),
-            'fields': ('surname', 'name', 'datetime')}),
+            'fields': ('surname', 'name', 'birthdate')}),
         ('Права', {
             'classes': ('wide',),
             'fields': ('is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
     )
-    search_fields = ('email',)
+    readonly_fields = ('last_login',)
+    search_fields = ('email', 'name', 'surname')
     ordering = ('email',)
 
 

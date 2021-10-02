@@ -39,7 +39,7 @@ class ChatTypeAdmin(admin.ModelAdmin):
 class UserTaskAdmin(admin.ModelAdmin):
     model = UserTask
     list_display = ('id_user', 'id_task', 'id_manager', 'date_expired', 'is_done', 'weight')
-    list_filter = ('id_user', 'id_task', 'id_manager', 'date_expired', 'is_done', 'weight')
+    list_filter = ('id_user', 'id_manager', 'date_expired', 'is_done', 'weight')
     fieldsets = (
         (None, {'fields': ('id_user', 'id_task', 'id_manager', 'date_expired', 'is_done', 'date_done', 'weight',)}),
     )
@@ -49,7 +49,7 @@ class UserTaskAdmin(admin.ModelAdmin):
             'fields': ('id_user', 'id_task', 'id_manager', 'date_expired', 'weight',)}
          ),
     )
-    search_fields = ('id_user', 'id_task', 'id_manager')
+    search_fields = ('id_user', 'id_task', 'id_manager', 'date_expired')
     ordering = ('id_user', 'date_expired', '-weight')
 
 
@@ -67,7 +67,6 @@ class ForeignChatAdmin(admin.ModelAdmin):
          ),
     )
     search_fields = ('name', 'tg_link', 'id_type')
-    ordering = ('name',)
 
     def telegram(self, obj):
         return format_html("<a href='{url}' target='_blank'>{url}</a>", url=obj.tg_link)
