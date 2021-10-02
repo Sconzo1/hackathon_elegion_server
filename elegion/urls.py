@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('auth/', include('authentication.urls')),
     path('chats/', include('chats.urls')),
+    path('redmine/', include('redmine.urls')),
     path('', include('spectacular.urls')),
     # path("schema/", SpectacularAPIView.as_view(), name="schema"),
     # path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
