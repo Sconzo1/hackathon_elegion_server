@@ -5,7 +5,9 @@ from authentication.models import User
 
 
 class EmailAuthBackend(ModelBackend):
-    def authenticate(self, email=None, password=None, **kwargs):
+    def authenticate(self, request=None, email=None, password=None, username=None, **kwargs):
+        if not email:
+            email = username
         if not (email and password):
             return None
         try:

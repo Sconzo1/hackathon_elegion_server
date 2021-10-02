@@ -6,29 +6,41 @@ from authentication.managers import UserManager
 
 
 class UserType(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField('Название', max_length=200)
 
     class Meta:
         db_table = 'user_types'
         ordering = ['name']
+        verbose_name = 'Тип пользователя'
+        verbose_name_plural = 'Типы пользователя'
+
+    def __str__(self):
+        return self.name
 
 
 class UserRank(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField('Название', max_length=200)
 
     class Meta:
         db_table = 'user_ranks'
         ordering = ['name']
+        verbose_name = 'Ранг пользователя'
+        verbose_name_plural = 'Ранги пользователя'
+
+    def __str__(self):
+        return self.name
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True, max_length=100)
-    password = models.CharField(max_length=300)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    last_login = models.DateTimeField(null=True)
-    id_user_type = models.ForeignKey(UserType, models.CASCADE, db_column='id_user_type')
-    id_user_rank = models.ForeignKey(UserRank, models.CASCADE, db_column='id_user_rank')
+    email = models.EmailField('Почта', unique=True, max_length=100)
+    password = models.CharField('Пароль', max_length=300)
+    is_staff = models.BooleanField('Сотрудник?', default=False)
+    is_superuser = models.BooleanField('Суперпользователь?', default=False)
+    last_login = models.DateTimeField('Время последнего входа', null=True)
+    id_user_type = models.ForeignKey(UserType, models.CASCADE, verbose_name='Тип пользователя',
+                                     db_column='id_user_type')
+    id_user_rank = models.ForeignKey(UserRank, models.CASCADE, verbose_name='Ранг пользователя',
+                                     db_column='id_user_rank')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -40,3 +52,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'users'
         ordering = ['email']
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+    def __str__(self):
+        return self.email
