@@ -3,15 +3,19 @@ from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import viewsets, permissions
 
-from validators import validate_int
 from . import serializers
-from .models import Task
+from .models import Task, ChatType, ForeignChat
 from .models import UserTask
 
 
 class TaskView(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = serializers.TaskSerializer
+
+
+class ChatTypeView(viewsets.ModelViewSet):
+    queryset = ChatType.objects.all()
+    serializer_class = serializers.ChatTypeSerializer
 
 
 @method_decorator(name='list',
@@ -22,3 +26,7 @@ class UserTaskView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
     filter_fields = ['id_user']
 
+
+class ForeignChatView(viewsets.ModelViewSet):
+    queryset = ForeignChat.objects.all()
+    serializer_class = serializers.ForeignChatSerializer

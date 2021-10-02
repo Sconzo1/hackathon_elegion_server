@@ -21,6 +21,19 @@ class Task(models.Model):
         return self.name
 
 
+class ChatType(models.Model):
+    name = models.CharField('Название', max_length=200)
+
+    class Meta:
+        db_table = 'chat_types'
+        ordering = ['name']
+        verbose_name = 'Тип чата'
+        verbose_name_plural = 'Типы чата'
+
+    def __str__(self):
+        return self.name
+
+
 # Operated models tables
 
 class UserTask(models.Model):
@@ -50,3 +63,18 @@ class UserTask(models.Model):
 
     def __str__(self):
         return f"{self.id_user} || {self.id_task}"
+
+
+class ForeignChat(models.Model):
+    name = models.CharField('Название', max_length=200)
+    tg_link = models.URLField('Telegram', max_length=300)
+    id_type = models.ForeignKey(ChatType, on_delete=models.CASCADE, verbose_name="Тип", db_column='id_type')
+
+    class Meta:
+        db_table = 'foreign_chats'
+        ordering = ['name']
+        verbose_name = 'Чат'
+        verbose_name_plural = 'Чаты'
+
+    def __str__(self):
+        return self.name
