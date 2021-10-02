@@ -34,13 +34,18 @@ class UserRank(models.Model):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('Почта', unique=True, max_length=100)
     password = models.CharField('Пароль', max_length=300)
-    is_staff = models.BooleanField('Сотрудник?', default=False)
-    is_superuser = models.BooleanField('Суперпользователь?', default=False)
-    last_login = models.DateTimeField('Время последнего входа', null=True)
+
+    surname = models.CharField('Фамилия', max_length=150)
+    name = models.CharField('Имя', max_length=150)
+    birthdate = models.DateField('Дата рождения', null=True)
     id_user_type = models.ForeignKey(UserType, models.CASCADE, verbose_name='Тип пользователя',
                                      db_column='id_user_type')
     id_user_rank = models.ForeignKey(UserRank, models.CASCADE, verbose_name='Ранг пользователя',
                                      db_column='id_user_rank')
+
+    is_staff = models.BooleanField('Сотрудник?', default=False)
+    is_superuser = models.BooleanField('Суперпользователь?', default=False)
+    last_login = models.DateTimeField('Время последнего входа', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -44,7 +44,7 @@ class UserTask(models.Model):
 
     class Meta:
         db_table = 'user_tasks'
-        ordering = ['date_expired']
+        ordering = ['is_done', 'date_expired']
         verbose_name = 'Задача пользователя'
         verbose_name_plural = 'Задачи пользователя'
 
