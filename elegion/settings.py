@@ -177,3 +177,5 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 django_heroku.settings(locals())
+if os.environ.get('ENV') == 'development':
+    del DATABASES['default']['OPTIONS']['sslmode']

@@ -20,9 +20,5 @@ class UserTaskView(viewsets.ModelViewSet):
     queryset = UserTask.objects.all()
     serializer_class = serializers.UserTaskSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
+    filter_fields = ['id_user']
 
-    def get_queryset(self):
-        id_user = self.request.query_params.get('id_user')
-        if validate_int(id_user, min_value=0):
-            return self.queryset.filter(id_user=id_user)
-        return self.queryset
