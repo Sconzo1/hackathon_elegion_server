@@ -32,3 +32,17 @@ class IssueView(viewsets.GenericViewSet, ListModelMixin):
             })
         pprint(issues)
         return JsonResponse(issues, safe=False, json_dumps_params={'ensure_ascii': False})
+
+# issue = redmine.issue.create(
+#     project_id = 'hghdfhfgd',
+#     subject = 'eLegionTask',
+#     tracker_id = 0,
+#     description = 'xdxd',
+#     status_id = 0,
+#     priority_id = 0,
+#     assigned_to_id = 0,
+#     start_date= datetime.date(2014, 1, 1),
+#     due_date= datetime.date(2014, 2, 1),
+#     custom_fields = []
+# )
+# project.issues[i].id
